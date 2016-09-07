@@ -18,23 +18,22 @@ public class GameSystem : MonoBehaviour
 
     //アイテム
     public GameObject item_key;
+    public GameObject Door2;
+    public GameObject Door3;
+
 
     /*------------
 	管理
 	------------*/
-    public string standName; //現在の立ち位置
     public string myItem;
-
 
     // アイテムボタン
     public GameObject itemBtn_key;
 
+    // Use this for initialization
     void Start()
     {
-        standName = "centerN"; //現在の立ち位置 =　北向き
         eventsystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        GameObject.Find("mainCamera").transform.rotation = Quaternion.Euler(0, 90, 0);
-
         item_key = GameObject.Find("key");
         item_key.SetActive(false);
 
@@ -48,53 +47,16 @@ public class GameSystem : MonoBehaviour
     void Update()
     {
         /*--------------
-		画面クリック処理
-		--------------*/
+        画面クリック処理
+        --------------*/
         if (Input.GetMouseButtonUp(0))
         { //左クリック
             if (eventsystem.currentSelectedGameObject == null)
             {// UI以外（3D）をさわった
-             //3Dオブジェクトをクリックした時の処理　ここはまたあとで
-            }
-            else
-            { // UIをさわった
-                switch (eventsystem.currentSelectedGameObject.name)
-                {
-                    case "turnLBtn":
-                        turnL();
-                        break;
-                }
+                searchRoom(); //3Dオブジェクトをクリックした時の処理
             }
         }
     }
-    public void turnL()
-    {
-        switch (standName)
-        {
-            case "centerN":
-                GameObject.Find("mainCamera").transform.rotation = Quaternion.Euler(0, 270, 0);
-                GameObject.Find("mainCamera").transform.position = new Vector3(-1, 7, -20);
-                standName = "centerW";
-                break;
-            case "centerW":
-                GameObject.Find("mainCamera").transform.rotation = Quaternion.Euler(0, 180, 0);
-                GameObject.Find("mainCamera").transform.position = new Vector3(-1, 7, -20);
-                standName = "centerS";
-                break;
-            case "centerS":
-                GameObject.Find("mainCamera").transform.rotation = Quaternion.Euler(0, 90, 0);
-                GameObject.Find("mainCamera").transform.position = new Vector3(-5, 7, -20);
-                standName = "centerE";
-                break;
-            case "centerE":
-                GameObject.Find("mainCamera").transform.rotation = Quaternion.Euler(0, 0, 0);
-                GameObject.Find("mainCamera").transform.position = new Vector3(-6, 7, -26);
-                standName = "centerN";
-                break;
-        }
-    }
-
-
 
     public void searchRoom()
     {
@@ -105,23 +67,31 @@ public class GameSystem : MonoBehaviour
             selectedGameObject = hit.collider.gameObject;
             switch (selectedGameObject.name)
             {
-                case "desk/desk/Door2":
-                    Debug.Log("机の扉を開けた");
+                case "Door2":
+                    Debug.Log("ドアを押した");
+                    var time = 3f;
+                    iTween.RotateTo(Door2, iTween.Hash(
+                     "z", -90,
+                    "time", time,
+                    "islocal", true
+                      ));
                     item_key.SetActive(true);
                     break;
-
-                case "Door":
-                    if (myItem == "key")
-                    {
-                        iTween.MoveTo(GameObject.Find("Door"), iTween.Hash(
-                            "x", -40, "time", 0.4, "islocal", true
-                        ));
-                    }
-                    break;
-
                 case "key":
                     item_key.SetActive(false);
                     itemBtn_key.SetActive(true);
+                    break;
+                case "Door3":
+                    if (myItem == "key")
+                    {
+                        Debug.Log("ドアを押した");
+                        var time1 = 3f;
+                        iTween.RotateTo(Door3, iTween.Hash(
+                         "y", 90,
+                        "time", time1,
+                        "islocal", true
+                          ));
+                    }
                     break;
             }
         }
