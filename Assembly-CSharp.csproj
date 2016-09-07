@@ -45,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DoorController.cs" />
+     <Compile Include="Assets\Perhab\Item.cs" />
+     <Compile Include="Assets\Script\PlayerController.cs" />
      <Compile Include="Assets\player.cs" />
      <Compile Include="Assets\wall.cs" />
  <Reference Include="UnityEngine.UI">
