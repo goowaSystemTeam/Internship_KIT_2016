@@ -45,8 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\script\GameController.cs" />
-     <Compile Include="Assets\script\mainloadscript.cs" />
+     <Compile Include="Assets\script\DispMsg.cs" />
+     <Compile Include="Assets\script\SceneChnger.cs" />
+     <Compile Include="Assets\script\touch.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

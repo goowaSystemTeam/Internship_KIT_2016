@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class SceneChnger : MonoBehaviour {
 
-	public void LoadMain() {
-		Application.LoadLevel ("main");
-	}
+	public string nextSceneName;
 	// Use this for initialization
 	void Start () {
 	
@@ -13,6 +11,8 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetMouseButton(0)){
+			Application.LoadLevel (nextSceneName);
 	}
+}
 }
