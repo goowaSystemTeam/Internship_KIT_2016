@@ -48,6 +48,7 @@
      <Compile Include="Assets\Clock\Scripts\Clock.cs" />
      <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\CameraFollow.cs" />
+     <Compile Include="Assets\Script\EnemyMove.cs" />
      <Compile Include="Assets\Script\Item.cs" />
      <Compile Include="Assets\Script\Itemtana.cs" />
      <Compile Include="Assets\Script\PlayerMove.cs" />
@@ -57,6 +58,8 @@
      <Compile Include="Assets\Script\UseRigidbodyShotcontroller.cs" />
      <Compile Include="Assets\Script\Wall.cs" />
      <Compile Include="Assets\Script\door2.cs" />
+     <Compile Include="Assets\Script\enemysound01.cs" />
+     <Compile Include="Assets\Script\playsound.cs" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
