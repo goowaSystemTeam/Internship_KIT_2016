@@ -29,6 +29,11 @@ public class GameSystem : MonoBehaviour
     public GameObject cabinet_door2;
     public GameObject cabinet_Door2;
     public GameObject Door;
+    public GameObject poster1;
+    public GameObject item_poster1;
+    public GameObject poster2;
+    public GameObject item_poster2;
+    public GameObject Directional_Light1;
 
 
     /*------------
@@ -60,6 +65,15 @@ public class GameSystem : MonoBehaviour
         itemBtn_Pistol01 = GameObject.Find("itemBtn_Pistol01");
         itemBtn_Pistol01.SetActive(false);
         myItem = "noitem";
+
+        eventsystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        item_poster1 = GameObject.Find("item_poster1");
+        item_poster1.SetActive(false);
+
+        eventsystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        item_poster2 = GameObject.Find("item_poster2");
+        item_poster2.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -81,7 +95,7 @@ public class GameSystem : MonoBehaviour
     {
         selectedGameObject = null;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 10000000, 1 << 8))
+        if (Physics.Raycast(ray, out hit, 5, 1 << 8))
         {
             selectedGameObject = hit.collider.gameObject;
             switch (selectedGameObject.name)
@@ -144,41 +158,66 @@ public class GameSystem : MonoBehaviour
                     "islocal", true
                       ));
                     break;
+                case "poster1":
+                    selectedGameObject.name = "poster1";
+                    Debug.Log("ポスター1を押した");
+                    item_poster1.SetActive(true);
+                    Directional_Light1.SetActive(false);
+                    break;
+                case "item_poster1":
+                    selectedGameObject.name = "item_poster1";
+                    Debug.Log("ポスター1を押した");
+                    item_poster1.SetActive(false);
+                    Directional_Light1.SetActive(true);
+                    break;
+                case "poster2":
+                    selectedGameObject.name = "poster2";
+                    Debug.Log("ポスター2を押した");
+                    item_poster2.SetActive(true);
+                    Directional_Light1.SetActive(false);
+                    break;
+                case "item_poster2":
+                    selectedGameObject.name = "item_poster2";
+                    Debug.Log("ポスター2を押した");
+                    item_poster2.SetActive(false);
+                    Directional_Light1.SetActive(true);
+                    break;
             }
         }
-        rayItem = GameObject.Find("itemListCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        /*rayItem = GameObject.Find("itemListCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(rayItem, out hit, 10000000, 1 << 9))
         {
-            selectedGameObject = hit.collider.gameObject;
-            switch (selectedGameObject.name)
-            {
-                case "itemBtn_key_plane":
-                    if (myItem == "key")
-                    {
-                        GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
-                        myItem = "noitem";
-                    }
-                    else
-                    {
-                        GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = true;
-                        myItem = "key";
-                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
-                    }
-                    break;
-                case "itemBtn_Pistol01_plane":
-                    if (myItem == "Pistol01")
-                    {
-                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
-                        myItem = "noitem";
-                    }
-                    else
-                    {
-                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = true;
-                        myItem = "Pistol01";
-                        GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
-                    }
-                    break;
-            }
+            selectedGameObject = hit.collider.gameObject;*/
+           /* switch (selectedGameObject.name)
+        {
+            case "itemBtn_key_plane":*/
+                if (Input.GetMouseButtonUp(1) && myItem == "key")
+                {
+                    Debug.Log("2を押した");
+                    GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
+                    myItem = "noitem";
+                }
+                else
+                {
+                    GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = true;
+                    myItem = "key";
+                    GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
+                }
+                //break;
+           // case "itemBtn_Pistol01_plane":
+                if (Input.GetMouseButtonUp(1) && myItem == "Pistol01")
+                {
+                    Debug.Log("2を押した");
+                    GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
+                    myItem = "noitem";
+                }
+                else 
+                {
+                    GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = true;
+                    myItem = "Pistol01";
+                    GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
+                }
+                //break;
         }
     }
-}
+//}
