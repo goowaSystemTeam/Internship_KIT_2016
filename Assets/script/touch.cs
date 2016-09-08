@@ -1,27 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class touch : MonoBehaviour {
 
 	public AudioClip voice_01;
 	public AudioClip voice_02;
 
-	//private Animator animator;
-	//private AudioSource univoice;
+
+	public RectTransform fukidashi;
+	public Text fukidashiMsg;
 
 	// Use this for initialization
 	void Start () {
-	
-		//animator = GetComponent<Animator> ();
-		//univoice = GetComponent<AudioSource> ();
+
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		//animator.SetBool ("Touch", false);
-		//animator.SetBool ("TouchHead", false);
 
 		Ray ray;
 		RaycastHit hit;
@@ -33,24 +29,21 @@ public class touch : MonoBehaviour {
 			//マウスカーソルの位置からカメラの画面を通してレイを飛ばす 
 			ray=Camera.main.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast (ray, out hit, 100000)) {
+			if (Physics.Raycast (ray, out hit, 1000000)) {
 
 				hitObject = hit.collider.gameObject;
 				if (hitObject.gameObject.tag == "player") {
-					//animator.SetBool ("TouchPlayer", true);
+					Debug.Log ("hit");
 
-					//univoice.clip = voice_01;
-					//univoice.Play ();
+					fukidashiMsg.text="text2";
 
 					DispMsg.dispMessage ("hello");
 				} 
-				else if (hitObject.gameObject.tag == "GameController") {
-					Debug.Log ("hit");
+				else if (hitObject.gameObject.tag == "Head") {
+					//Debug.Log ("hit");
 
-					//animator.SetBool ("Touch", true);
-
-					//univoice.clip = voice_02;
-					//univoice.Play ();
+					//fukidashi.localScale = new Vector3(0.5f,0.5f,1);
+					fukidashiMsg.text = "Test";
 
 					DispMsg.dispMessage ("good");
 				}

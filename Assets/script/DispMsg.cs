@@ -18,7 +18,7 @@ public class DispMsg : MonoBehaviour {
 		dispMsg=msg;	//メッセージを代入
 	}
 
-	float nextTime=0;
+	//float nextTime=0;
 	
 	// Update is called once per frame
 	void Update () {
