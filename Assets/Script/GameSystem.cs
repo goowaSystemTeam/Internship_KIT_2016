@@ -18,8 +18,17 @@ public class GameSystem : MonoBehaviour
 
     //アイテム
     public GameObject item_key;
+    public GameObject item_Pistol01;
+    public GameObject Door1;
+    public GameObject Door11;
     public GameObject Door2;
+    public GameObject Door21;
     public GameObject Door3;
+    public GameObject cabinet_door1;
+    public GameObject cabinet_Door1;
+    public GameObject cabinet_door2;
+    public GameObject cabinet_Door2;
+    public GameObject Door;
 
 
     /*------------
@@ -29,6 +38,7 @@ public class GameSystem : MonoBehaviour
 
     // アイテムボタン
     public GameObject itemBtn_key;
+    public GameObject itemBtn_Pistol01;
 
     // Use this for initialization
     void Start()
@@ -40,6 +50,15 @@ public class GameSystem : MonoBehaviour
         GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
         itemBtn_key = GameObject.Find("itemBtn_key");
         itemBtn_key.SetActive(false);
+        myItem = "noitem";
+
+        eventsystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        item_Pistol01 = GameObject.Find("Pistol01");
+        item_Pistol01.SetActive(false);
+
+        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
+        itemBtn_Pistol01 = GameObject.Find("itemBtn_Pistol01");
+        itemBtn_Pistol01.SetActive(false);
         myItem = "noitem";
     }
 
@@ -67,12 +86,26 @@ public class GameSystem : MonoBehaviour
             selectedGameObject = hit.collider.gameObject;
             switch (selectedGameObject.name)
             {
+                case "Door1":
+                    Debug.Log("ドア1を押した");
+                    var time1 = 3f;
+                    iTween.RotateTo(Door11, iTween.Hash(
+                     "z", 90,
+                    "time", time1,
+                    "islocal", true
+                      ));
+                    item_Pistol01.SetActive(true);
+                    break;
+                case "Pistol01":
+                    item_Pistol01.SetActive(false);
+                    itemBtn_Pistol01.SetActive(true);
+                    break;
                 case "Door2":
-                    Debug.Log("ドアを押した");
-                    var time = 3f;
-                    iTween.RotateTo(Door2, iTween.Hash(
+                    Debug.Log("ドア2を押した");
+                    var time2 = 3f;
+                    iTween.RotateTo(Door21, iTween.Hash(
                      "z", -90,
-                    "time", time,
+                    "time", time2,
                     "islocal", true
                       ));
                     item_key.SetActive(true);
@@ -81,17 +114,35 @@ public class GameSystem : MonoBehaviour
                     item_key.SetActive(false);
                     itemBtn_key.SetActive(true);
                     break;
-                case "Door3":
+                case "Door":
                     if (myItem == "key")
                     {
                         Debug.Log("ドアを押した");
-                        var time1 = 3f;
+                        var time3 = 3f;
                         iTween.RotateTo(Door3, iTween.Hash(
                          "y", 90,
-                        "time", time1,
+                        "time", time3,
                         "islocal", true
                           ));
                     }
+                    break;
+                case "cabinet_door1":
+                    Debug.Log("キャビネットドア1を押した");
+                    var time4 = 3f;
+                    iTween.RotateTo(cabinet_Door1, iTween.Hash(
+                     "z", 90,
+                    "time", time4,
+                    "islocal", true
+                      ));
+                    break;
+                case "cabinet_door2":
+                    Debug.Log("キャビネットドア2を押した");
+                    var time5 = 3f;
+                    iTween.RotateTo(cabinet_Door2, iTween.Hash(
+                     "z", -90,
+                    "time", time5,
+                    "islocal", true
+                      ));
                     break;
             }
         }
@@ -111,6 +162,20 @@ public class GameSystem : MonoBehaviour
                     {
                         GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = true;
                         myItem = "key";
+                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
+                    }
+                    break;
+                case "itemBtn_Pistol01_plane":
+                    if (myItem == "Pistol01")
+                    {
+                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = false;
+                        myItem = "noitem";
+                    }
+                    else
+                    {
+                        GameObject.Find("itemBtn_Pistol01_plane").GetComponent<Renderer>().enabled = true;
+                        myItem = "Pistol01";
+                        GameObject.Find("itemBtn_key_plane").GetComponent<Renderer>().enabled = false;
                     }
                     break;
             }
