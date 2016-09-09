@@ -15,7 +15,7 @@ public class DispMsg : MonoBehaviour {
 
 	public static void dispMessage (string msg){
 
-		dispMsg=msg;	//メッセージを代入
+		dispMsg=msg;
 	}
 
 	//float nextTime=0;
